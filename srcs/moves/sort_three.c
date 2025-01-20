@@ -19,7 +19,7 @@ void sort_three(t_stack_node **a) {
         ra(a, false);
     else if ((*a)->next == biggest_node)
         rra(a, false);
-    if ((*a)->nbr > (*a)->next->nbr)
+    if ((*a)->data > (*a)->next->data)
         sa(a, false);
 }
 

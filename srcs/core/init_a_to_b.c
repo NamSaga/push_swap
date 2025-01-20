@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../../inc/push_swap.h"
 
-void current_index(t_stack_node *stack) {
+void current_pos(t_stack_node *stack) {
     int i;
     int median;
 
@@ -20,8 +20,8 @@ void current_index(t_stack_node *stack) {
         return;
     median = stack_len(stack) / 2;
     while (stack) {
-        stack->index = i;
-        stack->above_median = (i <= median);
+        stack->pos = i;
+        stack->mid = (i <= median);
         stack = stack->next;
         ++i;
     }
@@ -36,8 +36,8 @@ static void set_target_a(t_stack_node *a, t_stack_node *b) {
         best_match_index = LONG_MIN;
         current_b = b;
         while (current_b) {
-            if (current_b->nbr < a->nbr && current_b->nbr > best_match_index) {
-                best_match_index = current_b->nbr;
+            if (current_b->data < a->data && current_b->data > best_match_index) {
+                best_match_index = current_b->data;
                 target_node = current_b;
             }
             current_b = current_b->next;
@@ -57,13 +57,13 @@ static void cost_analysis_a(t_stack_node *a, t_stack_node *b) {
     len_a = stack_len(a);
     len_b = stack_len(b);
     while (a) {
-        a->push_cost = a->index;
-        if (!(a->above_median))
-            a->push_cost = len_a - (a->index);
-        if (a->target_node->above_median)
-            a->push_cost += a->target_node->index;
+        a->push_cost = a->pos;
+        if (!(a->mid))
+            a->push_cost = len_a - (a->pos);
+        if (a->target_node->mid)
+            a->push_cost += a->target_node->pos;
         else
-            a->push_cost += len_b - (a->target_node->index);
+            a->push_cost += len_b - (a->target_node->pos);
         a = a->next;
     }
 }
@@ -86,8 +86,8 @@ void set_cheapest(t_stack_node *stack) {
 }
 
 void init_nodes_a(t_stack_node *a, t_stack_node *b) {
-    current_index(a);
-    current_index(b);
+    current_pos(a);
+    current_pos(b);
     set_target_a(a, b);
     cost_analysis_a(a, b);
     set_cheapest(a);

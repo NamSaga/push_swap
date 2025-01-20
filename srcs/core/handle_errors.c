@@ -28,7 +28,7 @@ int err_dup(t_stack_node *a, int n) {
     if (!a)
         return (0);
     while (a) {
-        if (a->nbr == n)
+        if (a->data == n)
             return (1);
         a = a->next;
     }

@@ -20,10 +20,10 @@
 
 typedef struct s_stack_node //A container of data enclosed in {} braces. `s_` for struct
 {
-	int					nbr; //The number to sort
-	int					index; //The number's position in the stack
+	int					data; //The number to sort
+	int					pos; //The number's position in the stack
 	int					push_cost; //How many commands in total
-	bool				above_median; //Used to calculate `push_cost`
+	bool				mid; //Used to calculate `push_cost`
 	bool				cheapest; //The node that is the cheapest to do commands
 	struct s_stack_node	*target_node; //The target node of a node in the opposite stack
 	struct s_stack_node	*next; //A pointer to the next node
@@ -43,7 +43,7 @@ char			**split(char *s, char c); //To handle input of numbers as a string argume
 //***Nodes initiation
 void			init_nodes_a(t_stack_node *a, t_stack_node *b); //To prep all nodes for pushing `a` to `b`
 void			init_nodes_b(t_stack_node *a, t_stack_node *b); //To prep all nodes for pushing `b` back to `a`
-void			current_index(t_stack_node *stack); //Set the node's current index
+void			current_pos(t_stack_node *stack); //Set the node's current pos
 void			set_cheapest(t_stack_node *stack); //Set the stack's cheapest node
 	t_stack_node	*get_cheapest(t_stack_node *stack); //Get the cheapest node of a stack
 void			prep_for_push(t_stack_node **s, t_stack_node *n, char c); //Prep the required nodes on top for pushing
