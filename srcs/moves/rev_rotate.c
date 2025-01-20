@@ -6,44 +6,52 @@
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:56:27 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/20 11:56:41 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:59:18 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/push_swap.h"
 
-static void rev_rotate(t_stack_node **stack) 
+static void	rev_rotate(t_stack_node **stack)
 {
-    t_stack_node *last;
+	t_stack_node	*last;
 
-    if (!*stack || !(*stack)->next)
-        return;
-    last = find_last(*stack);
-    last->prev->next = NULL;
-    last->next = *stack;
-    last->prev = NULL;
-    *stack = last;
-    last->next->prev = last;
+	if (!*stack || !(*stack)->next)
+		return ;
+	last = find_last(*stack);
+	last->prev->next = NULL;
+	last->next = *stack;
+	last->prev = NULL;
+	*stack = last;
+	last->next->prev = last;
 }
 
-void rra(t_stack_node **a, bool print) 
+void	rr_both(t_stack_node **a, t_stack_node **b,
+		t_stack_node *cheapest_node)
 {
-    rev_rotate(a);
-    if (!print)
-        ft_printf("rra\n");
+	while (*b != cheapest_node->target_node && *a != cheapest_node)
+		rrr(a, b, false);
+	current_pos(*a);
+	current_pos(*b);
 }
 
-void rrb(t_stack_node **b, bool print)
+void	rra(t_stack_node **a, bool print)
 {
-    rev_rotate(b);
-    if (!print)
-        ft_printf("rrb\n");
+	rev_rotate(a);
+	if (!print)
+		ft_printf("rra\n");
 }
 
-void rrr(t_stack_node **a, t_stack_node **b, bool print) 
+void	rrb(t_stack_node **b, bool print)
 {
-    rev_rotate(a);
-    rev_rotate(b);
-    if (!print)
-        ft_printf("rrr\n");
+	rev_rotate(b);
+	if (!print)
+		ft_printf("rrb\n");
 }
 
+void	rrr(t_stack_node **a, t_stack_node **b, bool print)
+{
+	rev_rotate(a);
+	rev_rotate(b);
+	if (!print)
+		ft_printf("rrr\n");
+}

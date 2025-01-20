@@ -1,65 +1,42 @@
-# Standard
-NAME				= push_swap
+NAME        := push_swap
+CC        := gcc
+FLAGS    := -Wall -Wextra -Werror 
 
-# Directories
-LIBFT				= ./libft/libft.a
-INC					= inc
-SRC_DIR				= srcs/
-OBJ_DIR				= obj/
+SRCS        :=      srcs/core/ft_split.c \
+                          srcs/core/check_error.c \
+                          srcs/core/init_a_to_b.c \
+                          srcs/core/init_b_to_a.c \
+                          srcs/core/main.c \
+                          srcs/core/init_stacks.c \
+                          srcs/core/utils.c \
+                          srcs/moves/push.c \
+                          srcs/moves/rev_rotate.c \
+                          srcs/moves/rotate.c \
+                          srcs/moves/sort_stacks.c \
+                          srcs/moves/sort_three.c \
+                          srcs/moves/swap.c \
+                          lib_utils/ft_printf.c \
+                          lib_utils/ft_putnbr.c \
+                          lib_utils/ft_putstr.c \
+                          lib_utils/ft_print_pointer.c \
+                          
+OBJS        := $(SRCS:.c=.o)
 
-# Compiler and CFlags
-CC					= gcc
-CFLAGS				= -Wall -Werror -Wextra -I
-RM					= rm -f
+.c.o:
+	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-# Source Files
-MOVES_DIR		=	$(SRC_DIR)moves/push.c \
-						$(SRC_DIR)moves/rev_rotate.c \
-						$(SRC_DIR)moves/rotate.c \
-						$(SRC_DIR)moves/sort_stacks.c \
-						$(SRC_DIR)moves/sort_three.c \
-						$(SRC_DIR)moves/swap.c
 
-CORE_DIR		=	$(SRC_DIR)core/handle_errors.c \
-						$(SRC_DIR)core/init_a_to_b.c \
-						$(SRC_DIR)core/init_b_to_a.c \
-						$(SRC_DIR)core/main.c \
-						$(SRC_DIR)core/ft_split.c \
-						$(SRC_DIR)core/stack_init.c \
-						$(SRC_DIR)core/stack_utils.c
+${NAME}:	${OBJS}
+			@ ${CC} ${FLAGS} -o ${NAME} ${OBJS}
 
-# Concatenate all source files
-SRCS 				= $(MOVES_DIR) $(CORE_DIR)
+all:		${NAME}
 
-# Apply the pattern substitution to each source file in SRC and produce a corresponding list of object files in the OBJ_DIR
-OBJ 				= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
-
-# Build rules
-start:				
-					@make all
-
-$(LIBFT):
-					@make -C ./libft
-
-all: 				$(NAME)
-
-$(NAME): 			$(OBJ) $(LIBFT)
-					@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $(NAME)
-
-# Compile object files from source files
-$(OBJ_DIR)%.o:		$(SRC_DIR)%.c 
-					@mkdir -p $(@D)
-					@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+bonus:		all
 
 clean:
-					@$(RM) -r $(OBJ_DIR)
-					@make clean -C ./libft
+			@ ${RM} *.o */*.o */*/*.o
 
-fclean: 			clean
-					@$(RM) $(NAME)
-					@$(RM) $(LIBFT)
+fclean:		clean
+			@ ${RM} ${NAME}
 
-re: 				fclean all
-
-# Phony targets represent actions not files
-.PHONY: 			start all clean fclean re
+re:			fclean all

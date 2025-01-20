@@ -6,7 +6,7 @@
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:56:19 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/20 11:56:46 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:59:12 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	swap(t_stack_node **head)
 	(*head)->prev = NULL;
 }
 
-void	sa(t_stack_node	**a, bool print)
+void	sa(t_stack_node **a, bool print)
 {
 	swap(a);
 	if (!print)
