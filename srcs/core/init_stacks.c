@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_init.c                                       :+:      :+:    :+:   */
+/*   init_stacks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:55:50 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/20 16:08:25 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/21 08:16:02 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/push_swap.h"
@@ -20,7 +20,7 @@ static long	ft_atol(const char *s)
 	sign = 1;
 	while (*s == 32 || (*s >= 9 && *s <= 13))
 		s++;
-	if ( *s == '+' || *s == '-')
+	if (*s == '+' || *s == '-')
 	{
 		if (*s == '-')
 			sign = -1;
@@ -31,7 +31,7 @@ static long	ft_atol(const char *s)
 	return (result * sign);
 }
 
-static void	append_node(t_stack_node **stack, int n)
+static void	append(t_stack_node **stack, int n)
 {
 	t_stack_node	*node;
 	t_stack_node	*last_node;
@@ -57,27 +57,27 @@ static void	append_node(t_stack_node **stack, int n)
 	}
 }
 
-void	init_stack_a(t_stack_node **a, char **argv)
+void	init_stack_a(t_stack_node **a, char **av)
 {
 	long	n;
 	int		i;
 
 	i = 0;
-	while (argv[i])
+	while (av[i])
 	{
-		if (syntax_err(argv[i]))
+		if (syntax_err(av[i]))
 			free_errors(a);
-		n = ft_atol(argv[i]);
+		n = ft_atol(av[i]);
 		if (n > INT_MAX || n < INT_MIN)
 			free_errors(a);
 		if (err_dup(*a, (int)n))
 			free_errors(a);
-		append_node(a, (int)n);
+		append(a, (int)n);
 		i++;
 	}
 }
 
-t_stack_node	*get_cheapest(t_stack_node *stack)
+t_stack_node	*get_min(t_stack_node *stack)
 {
 	if (!stack)
 		return (NULL);
@@ -90,8 +90,7 @@ t_stack_node	*get_cheapest(t_stack_node *stack)
 	return (NULL);
 }
 
-void	to_push(t_stack_node **stack, t_stack_node *top_node,
-		char stack_name)
+void	to_push(t_stack_node **stack, t_stack_node *top_node, char stack_name)
 {
 	while (*stack != top_node)
 	{

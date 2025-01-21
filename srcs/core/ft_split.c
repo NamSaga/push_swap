@@ -5,31 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 11:55:49 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/20 16:09:56 by rmamisoa         ###   ########.fr       */
+/*   Created: 2025/01/16 11:55:49 by rmamisoa          #+#    #+#             */
+/*   Updated: 2025/01/21 08:15:52 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/push_swap.h"
 
 static int	word_count(char *s, char c)
 {
-	int		count;
+	int	i;
+	int	count;
 	int	word;
 
+	i = 0;
 	count = 0;
-	while (*s)
+	while (s[i])
 	{
 		word = 0;
-		while (*s == c)
-			++s;
-		while (*s != c && *s)
+		while (s[i] == c)
+			++i;
+		while (s[i] && s[i] != c)
 		{
 			if (!word)
 			{
 				++count;
 				word = 1;
 			}
-			++s;
+			++i;
 		}
 	}
 	return (count);
@@ -37,32 +39,35 @@ static int	word_count(char *s, char c)
 
 static char	*get_next_word(char *s, char c)
 {
-	static int	cursor = 0;
-	char		*next_word;
 	int			len;
 	int			i;
+	static int	pos = 0;
+	char		*next_word;
 
 	len = 0;
 	i = 0;
-	while (s[cursor] == c)
-		++cursor;
-	while (s[cursor + len] && (s[cursor + len] != c))
+	while (s[pos] == c)
+		++pos;
+	while (s[pos + len] && (s[pos + len] != c))
 		++len;
 	next_word = malloc(sizeof(char) * (len + 1));
 	if (!next_word)
 		return (NULL);
-	while (s[cursor] && (s[cursor] != c))
-		next_word[i++] = s[cursor++];
+	while (s[pos] && (s[pos] != c))
+	{
+		next_word[i] = s[pos];
+		pos++;
+		i++;
+	}
 	next_word[i] = '\0';
 	return (next_word);
 }
 
-
 char	**split(char *s, char c)
 {
+	int		i;
 	int		wc;
 	char	**tab;
-	int		i;
 
 	i = 0;
 	wc = word_count(s, c);
@@ -71,7 +76,7 @@ char	**split(char *s, char c)
 	tab = malloc(sizeof(char *) * (wc + 2));
 	if (!tab)
 		return (NULL);
-	while (wc >= 0)
+	while (wc-- >= 0)
 	{
 		if (i == 0)
 		{
@@ -82,7 +87,6 @@ char	**split(char *s, char c)
 			continue ;
 		}
 		tab[i++] = get_next_word(s, c);
-		wc--;
 	}
 	tab[i] = NULL;
 	return (tab);
