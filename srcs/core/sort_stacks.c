@@ -13,15 +13,15 @@
 
 static void	atob(t_stack_node **a, t_stack_node **b)
 {
-	t_stack_node	*cheapest_node;
+	t_stack_node	*min_node;
 
-	cheapest_node = get_cheapest(*a);
-	if (cheapest_node->mid && cheapest_node->target_node->mid)
-		r_both(a, b, cheapest_node);
-	else if (!(cheapest_node->target_node->mid) && !(cheapest_node->mid))
-		rr_both(a, b, cheapest_node);
-	to_push(a, cheapest_node, 'a');
-	to_push(b, cheapest_node->target_node, 'b');
+	min_node = get_min(*a);
+	if (!(min_node->target_node->mid) && !(min_node->mid))
+		rr_both(a, b, min_node);
+	else if (min_node->mid && min_node->target_node->mid)
+		r_both(a, b, min_node);
+	to_push(a, min_node, 'a');
+	to_push(b, min_node->target_node, 'b');
 	pb(b, a, false);
 }
 
@@ -31,7 +31,7 @@ static void	btoa(t_stack_node **a, t_stack_node **b)
 	pa(a, b, false);
 }
 
-static void	min_on_top(t_stack_node **a)
+static void	push_min(t_stack_node **a)
 {
 	while (find_min(*a)->data != (*a)->data)
 	{
@@ -44,31 +44,24 @@ static void	min_on_top(t_stack_node **a)
 
 void	sort_stacks(t_stack_node **a, t_stack_node **b)
 {
-	int	len_a;
+	int	len;
 
-	len_a = stack_len(*a);
-	if (!stack_sorted(*a) && len_a > 3)
-	{
+	len = stack_len(*a);
+	if (!stack_sorted(*a) && len-- > 3)
 		pb(b, a, false);
-		len_a--;
-	}
-	if (!stack_sorted(*a) && len_a > 3)
-	{
+	if (!stack_sorted(*a) && len-- > 3)
 		pb(b, a, false);
-		len_a--;
-	}
-	while (!stack_sorted(*a) && len_a > 3)
+	while (!stack_sorted(*a) && len-- > 3)
 	{
 		init_a(*a, *b);
 		atob(a, b);
-		len_a--;
 	}
-	sort_three(a);
+	mid_sort(a);
 	while (*b)
 	{
 		init_b(*a, *b);
 		btoa(a, b);
 	}
 	current_pos(*a);
-	min_on_top(a);
+	push_min(a);
 }
