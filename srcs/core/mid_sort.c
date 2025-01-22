@@ -9,17 +9,19 @@
 /*   Updated: 2025/01/21 08:15:48 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../inc/push_swap.h"
 
-void	mid_sort(t_stack_node **a)
+void    sort_three(t_stack_node **a)
 {
-	t_stack_node	*max_node;
+    t_stack_node    *biggest_node;
 
-	max_node = find_max(*a);
-	if ((*a)->data > (*a)->next->data)
-		sa(a, false);
-	if (max_node == *a)
-		ra(a, false);
-	else if ((*a)->next == max_node)
-		rra(a, false);
+    biggest_node = find_max(*a);
+    if (biggest_node == *a)
+        ra(a, false);
+    else if ((*a)->next == biggest_node)
+        rra(a, false);
+    if ((*a)->nbr > (*a)->next->nbr)
+        sa(a, false);
 }
+
