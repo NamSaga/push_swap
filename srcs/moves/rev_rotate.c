@@ -6,9 +6,10 @@
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:56:27 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/21 08:15:47 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:50:12 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../inc/push_swap.h"
 
 static void	rev_rotate(t_stack_node **stack)
@@ -25,9 +26,10 @@ static void	rev_rotate(t_stack_node **stack)
 	last->next->prev = last;
 }
 
-void	rr_both(t_stack_node **a, t_stack_node **b, t_stack_node *cheapest_node)
+void	rr_both(t_stack_node **a, t_stack_node **b,
+		t_stack_node *cheapest_node)
 {
-	while ((*a != cheapest_node) && (*b != cheapest_node->target_node))
+	while (*b != cheapest_node->target_node && *a != cheapest_node)
 		rrr(a, b, false);
 	current_pos(*a);
 	current_pos(*b);
@@ -52,5 +54,5 @@ void	rrr(t_stack_node **a, t_stack_node **b, bool print)
 	rev_rotate(a);
 	rev_rotate(b);
 	if (!print)
-		write(1, "rrr\n", 3);
+		write(1, "rrr\n", 4);
 }

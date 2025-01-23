@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_hander.c                                     :+:      :+:    :+:   */
+/*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:45:28 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/20 07:56:25 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:50:17 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	err_dup(t_stack_node *a, int n)
 	return (0);
 }
 
-void	free_stack(t_stack_node **stack)
+void	ft_free(t_stack_node **stack)
 {
 	t_stack_node	*tmp;
 	t_stack_node	*current;
@@ -51,14 +51,16 @@ void	free_stack(t_stack_node **stack)
 	while (current)
 	{
 		tmp = current->next;
+		current->data = 0;
 		free(current);
 		current = tmp;
 	}
 	*stack = NULL;
 }
 
-void	free_errors(t_stack_node **a)
+void	err_free(t_stack_node **a)
 {
-	free_stack(a);
+	ft_free(a);
+	write(1, "Error\n", 6);
 	exit(1);
 }

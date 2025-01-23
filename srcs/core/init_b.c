@@ -6,29 +6,30 @@
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:05:31 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/21 08:15:51 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:50:07 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../inc/push_swap.h"
 
-static void	set_target_b(t_stack_node *a, t_stack_node *b)
+static void	set_b(t_stack_node *a, t_stack_node *b)
 {
-	t_stack_node	*current_a;
+	t_stack_node	*pos_a;
 	t_stack_node	*target_node;
 	long			matching;
 
 	while (b)
 	{
 		matching = LONG_MAX;
-		current_a = a;
-		while (current_a)
+		pos_a = a;
+		while (pos_a)
 		{
-			if (current_a->data > b->data && current_a->data < matching)
+			if (pos_a->data > b->data && pos_a->data < matching)
 			{
-				matching = current_a->data;
-				target_node = current_a;
+				matching = pos_a->data;
+				target_node = pos_a;
 			}
-			current_a = current_a->next;
+			pos_a = pos_a->next;
 		}
 		if (matching == LONG_MAX)
 			b->target_node = find_min(a);
@@ -42,5 +43,5 @@ void	init_b(t_stack_node *a, t_stack_node *b)
 {
 	current_pos(a);
 	current_pos(b);
-	set_target_b(a, b);
+	set_b(a, b);
 }

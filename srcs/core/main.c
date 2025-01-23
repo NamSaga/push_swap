@@ -6,9 +6,10 @@
 /*   By: rmamisoa@student.42antananarivo            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:03:56 by rmamisoa          #+#    #+#             */
-/*   Updated: 2024/12/18 14:46:12 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:50:08 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../inc/push_swap.h"
 
 int	main(int argc, char **argv)
@@ -32,6 +33,6 @@ int	main(int argc, char **argv)
 		else
 			sort_stacks(&a, &b);
 	}
-	free_stack(&a);
+	ft_free(&a);
 	return (0);
 }

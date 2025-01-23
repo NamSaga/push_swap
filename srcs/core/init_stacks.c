@@ -6,17 +6,18 @@
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:55:50 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/21 08:16:02 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:50:07 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../inc/push_swap.h"
 
 static long	ft_atol(const char *s)
 {
-	long	result;
+	long	res;
 	int		sign;
 
-	result = 0;
+	res = 0;
 	sign = 1;
 	while (*s == 32 || (*s >= 9 && *s <= 13))
 		s++;
@@ -27,8 +28,8 @@ static long	ft_atol(const char *s)
 		s++;
 	}
 	while (*s >= '0' && *s <= '9')
-		result = result * 10 + *s++ - 48;
-	return (result * sign);
+		res = res * 10 + *s++ - 48;
+	return (res * sign);
 }
 
 static void	append(t_stack_node **stack, int n)
@@ -57,21 +58,21 @@ static void	append(t_stack_node **stack, int n)
 	}
 }
 
-void	init_stack_a(t_stack_node **a, char **av)
+void	init_stack_a(t_stack_node **a, char **argv)
 {
 	long	n;
 	int		i;
 
 	i = 0;
-	while (av[i])
+	while (argv[i])
 	{
-		if (syntax_err(av[i]))
-			free_errors(a);
-		n = ft_atol(av[i]);
+		if (syntax_err(argv[i]))
+			err_free(a);
+		n = ft_atol(argv[i]);
 		if (n > INT_MAX || n < INT_MIN)
-			free_errors(a);
+			err_free(a);
 		if (err_dup(*a, (int)n))
-			free_errors(a);
+			err_free(a);
 		append(a, (int)n);
 		i++;
 	}
@@ -90,7 +91,8 @@ t_stack_node	*get_min(t_stack_node *stack)
 	return (NULL);
 }
 
-void	to_push(t_stack_node **stack, t_stack_node *top_node, char stack_name)
+void	to_push(t_stack_node **stack, t_stack_node *top_node,
+		char stack_name)
 {
 	while (*stack != top_node)
 	{

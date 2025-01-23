@@ -6,9 +6,10 @@
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:56:25 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/20 15:59:14 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:50:11 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../inc/push_swap.h"
 
 static void	push(t_stack_node **dst, t_stack_node **src)

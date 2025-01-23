@@ -6,9 +6,10 @@
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:44:56 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/21 08:15:48 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:50:06 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../inc/push_swap.h"
 
 void	current_pos(t_stack_node *stack)
@@ -29,24 +30,24 @@ void	current_pos(t_stack_node *stack)
 	}
 }
 
-static void	set_target_a(t_stack_node *a, t_stack_node *b)
+static void	set_a(t_stack_node *a, t_stack_node *b)
 {
-	t_stack_node	*current_b;
+	t_stack_node	*pos_b;
 	t_stack_node	*target_node;
 	long			matching;
 
 	while (a)
 	{
 		matching = LONG_MIN;
-		current_b = b;
-		while (current_b)
+		pos_b = b;
+		while (pos_b)
 		{
-			if (current_b->data < a->data && current_b->data > matching)
+			if (pos_b->data < a->data && pos_b->data > matching)
 			{
-				matching = current_b->data;
-				target_node = current_b;
+				matching = pos_b->data;
+				target_node = pos_b;
 			}
-			current_b = current_b->next;
+			pos_b = pos_b->next;
 		}
 		if (matching == LONG_MIN)
 			a->target_node = find_max(b);
@@ -100,7 +101,7 @@ void	init_a(t_stack_node *a, t_stack_node *b)
 {
 	current_pos(a);
 	current_pos(b);
-	set_target_a(a, b);
+	set_a(a, b);
 	check_a(a, b);
 	set_min(a);
 }

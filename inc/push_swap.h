@@ -6,9 +6,10 @@
 /*   By: rmamisoa@student.42antananarivo            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:54:56 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/20 15:59:13 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/23 08:50:15 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -64,7 +65,7 @@ void					rr_both(t_stack_node **a, t_stack_node **b,
 char					**split(char *s, char c);
 int						syntax_err(char *str_n);
 int						err_dup(t_stack_node *a, int n);
-void					free_stack(t_stack_node **stack);
-void					free_errors(t_stack_node **a);
+void					ft_free(t_stack_node **stack);
+void					err_free(t_stack_node **a);
 
 #endif
