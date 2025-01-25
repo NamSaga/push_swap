@@ -6,7 +6,11 @@
 /*   By: rmamisoa <rmamisoa@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 11:55:49 by rmamisoa          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/01/23 08:50:05 by rmamisoa         ###   ########.fr       */
+=======
+/*   Updated: 2025/01/21 08:15:52 by rmamisoa         ###   ########.fr       */
+>>>>>>> 1bec9f3515ce11d314bf9466feea8396522ff322
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +19,10 @@
 static int	word_count(char *s, char c)
 {
 	int	i;
+<<<<<<< HEAD
+=======
+	int	count;
+>>>>>>> 1bec9f3515ce11d314bf9466feea8396522ff322
 	int	word;
 	int	count;
 
