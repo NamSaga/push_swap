@@ -1,6 +1,6 @@
 NAME        := push_swap
 CC        := gcc
-FLAGS    := -Wall -Wextra -Werror 
+FLAGS    := -Wall -Wextra -Werror -g -pedantic
 
 SRCS        :=      srcs/core/ft_split.c \
                           srcs/core/check_error.c \
@@ -30,7 +30,7 @@ all:		${NAME}
 bonus:		all
 
 clean:
-			@ ${RM} srcs/core/ft_split.o srcs/core/check_error.o srcs/core/init_a.o srcs/core/init_b.o srcs/core/main.o srcs/core/init_stacks.o srcs/core/utils.o srcs/moves/push.o srcs/moves/rev_rotate.o srcs/moves/rotate.o srcs/core/sort_stacks.o srcs/core/mid_sort.o srcs/moves/swap.o
+			@ ${RM} ${OBJS}
 
 
 fclean:		clean
