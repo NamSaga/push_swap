@@ -19,8 +19,7 @@ static void	atob(t_stack_node **a, t_stack_node **b)
 	min_node = get_min(*a);
 	if (min_node->mid && min_node->target_node->mid)
 		r_both(a, b, min_node);
-	else if (!(min_node->mid)
-		&& !(min_node->target_node->mid))
+	else if (!(min_node->mid) && !(min_node->target_node->mid))
 		rr_both(a, b, min_node);
 	to_push(a, min_node, 'a');
 	to_push(b, min_node->target_node, 'b');

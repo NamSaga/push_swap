@@ -1,6 +1,6 @@
 NAME        := push_swap
 CC        := gcc
-FLAGS    := -Wall -Wextra -Werror -g -pedantic
+FLAGS    := -Wall -Wextra -Werror
 
 SRCS        :=      srcs/core/ft_split.c \
                           srcs/core/check_error.c \

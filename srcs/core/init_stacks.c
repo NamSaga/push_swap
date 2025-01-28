@@ -58,7 +58,7 @@ static void	append(t_stack_node **stack, int n)
 	}
 }
 
-void	init_stack_a(t_stack_node **a, char **argv)
+int	init_stack_a(t_stack_node **a, char **argv)
 {
 	long	n;
 	int		i;
@@ -67,15 +67,16 @@ void	init_stack_a(t_stack_node **a, char **argv)
 	while (argv[i])
 	{
 		if (syntax_err(argv[i]))
-			err_free(a);
+			return (err_free(a));
 		n = ft_atol(argv[i]);
 		if (n > INT_MAX || n < INT_MIN)
-			err_free(a);
+			return (err_free(a));
 		if (err_dup(*a, (int)n))
-			err_free(a);
+			return (err_free(a));
 		append(a, (int)n);
 		i++;
 	}
+	return (0);
 }
 
 t_stack_node	*get_min(t_stack_node *stack)
@@ -91,8 +92,7 @@ t_stack_node	*get_min(t_stack_node *stack)
 	return (NULL);
 }
 
-void	to_push(t_stack_node **stack, t_stack_node *top_node,
-		char stack_name)
+void	to_push(t_stack_node **stack, t_stack_node *top_node, char stack_name)
 {
 	while (*stack != top_node)
 	{

@@ -64,7 +64,7 @@ static char	*get_word(char *s, char c)
 	return (next_word);
 }
 
-char	**ft_split(char *s, char c)
+char	**ft_split(char *s, char c, int ac)
 {
 	int		i;
 	int		wc;
@@ -72,8 +72,6 @@ char	**ft_split(char *s, char c)
 
 	i = 0;
 	wc = word_count(s, c);
-	if (!wc)
-		exit(1);
 	tab = malloc(sizeof(char *) * (wc + 2));
 	if (!tab)
 		return (NULL);
@@ -90,5 +88,7 @@ char	**ft_split(char *s, char c)
 		tab[i++] = get_word(s, c);
 	}
 	tab[i] = NULL;
+	if (ac > 2)
+		free(s);
 	return (tab);
 }

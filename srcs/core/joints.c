@@ -42,6 +42,26 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (len);
 }
 
+char	*ft_strdup(const char *s)
+{
+	int		i;
+	char	*tab;
+
+	i = 0;
+	tab = malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!tab)
+	{
+		return (NULL);
+	}
+	while (s[i])
+	{
+		tab[i] = s[i];
+		i++;
+	}
+	tab[i] = '\0';
+	return (tab);
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*dest;
@@ -57,6 +77,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_strlcpy(dest, s1, len1 + 1);
 	ft_strlcpy((dest + len1), s2, len2 + 1);
+	free((void *)s1);
 	return (dest);
 }
 
@@ -69,7 +90,8 @@ char	*join_all(char **tab)
 	res = NULL;
 	if (!tab[i + 1])
 		return (tab[i]);
-	res = ft_strjoin(tab[i++], " ");
+	res = ft_strdup(tab[i++]);
+	res = ft_strjoin(res, " ");
 	while (tab[i])
 	{
 		res = ft_strjoin(res, tab[i]);

@@ -15,11 +15,9 @@
 
 # include <limits.h>
 # include <stdbool.h>
+# include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
- #include <stddef.h>
-
 
 typedef struct s_stack_node
 {
@@ -40,7 +38,7 @@ t_stack_node			*find_max(t_stack_node *stack);
 
 void					mid_sort(t_stack_node **a);
 void					sort_stacks(t_stack_node **a, t_stack_node **b);
-void					init_stack_a(t_stack_node **a, char **argv);
+int						init_stack_a(t_stack_node **a, char **argv);
 void					current_pos(t_stack_node *stack);
 void					set_min(t_stack_node *stack);
 int						stack_len(t_stack_node *stack);
@@ -65,15 +63,17 @@ void					r_both(t_stack_node **a, t_stack_node **b,
 void					rr_both(t_stack_node **a, t_stack_node **b,
 							t_stack_node *cheapest_node);
 
-char					**ft_split(char *s, char c);
+char					**ft_split(char *s, char c, int ac);
 int						syntax_err(char *str_n);
 int						err_dup(t_stack_node *a, int n);
 void					ft_free(t_stack_node **stack);
-void					err_free(t_stack_node **a);
+int						err_free(t_stack_node **a);
 
 size_t					ft_strlen(const char *s);
 size_t					ft_strlcpy(char *dst, const char *src, size_t size);
 char					*ft_strjoin(char const *s1, char const *s2);
 char					*join_all(char **tab);
+char					*ft_strdup(const char *s);
+void					free_tab(char **tab);
 
 #endif

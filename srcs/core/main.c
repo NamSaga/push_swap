@@ -6,14 +6,13 @@
 /*   By: rmamisoa@student.42antananarivo            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:03:56 by rmamisoa          #+#    #+#             */
-/*   Updated: 2025/01/28 11:40:30 by rmamisoa         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:38:22 by rmamisoa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/push_swap.h"
-#include <stdlib.h>
 
-static void	free_tab(char **tab)
+void	free_tab(char **tab)
 {
 	int	i;
 
@@ -23,22 +22,22 @@ static void	free_tab(char **tab)
 	while (tab[++i])
 		free(tab[i]);
 	free(tab);
+	exit(1);
 }
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	t_stack_node	*a;
 	t_stack_node	*b;
-	char			*tab;
 	char			**split_tab;
 
 	a = NULL;
 	b = NULL;
-	if (argc == 1)
+	if (ac == 1)
 		return (1);
-	tab = join_all(argv);
-	split_tab = ft_split(tab, ' ');
-	init_stack_a(&a, split_tab + 1);
+	split_tab = ft_split(join_all(av), ' ', ac);
+	if (init_stack_a(&a, split_tab + 1) == -1)
+		free_tab(split_tab);
 	if (!stack_sorted(a))
 	{
 		if (stack_len(a) == 2)
@@ -49,7 +48,6 @@ int	main(int argc, char **argv)
 			sort_stacks(&a, &b);
 	}
 	ft_free(&a);
-	/*free(tab);*/
 	free_tab(split_tab);
 	return (0);
 }

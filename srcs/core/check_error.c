@@ -16,8 +16,7 @@ int	syntax_err(char *str)
 {
 	if (!(*str == '+' || *str == '-' || (*str >= '0' && *str <= '9')))
 		return (1);
-	if ((*str == '+' || *str == '-') && !(str[1] >= '0'
-			&& str[1] <= '9'))
+	if ((*str == '+' || *str == '-') && !(str[1] >= '0' && str[1] <= '9'))
 		return (1);
 	while (*++str)
 	{
@@ -58,9 +57,9 @@ void	ft_free(t_stack_node **stack)
 	*stack = NULL;
 }
 
-void	err_free(t_stack_node **a)
+int	err_free(t_stack_node **a)
 {
 	ft_free(a);
 	write(1, "Error\n", 6);
-	exit(1);
+	return (-1);
 }
