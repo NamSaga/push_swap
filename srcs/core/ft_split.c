@@ -38,7 +38,7 @@ static int	word_count(char *s, char c)
 	return (count);
 }
 
-static char	*get_next_word(char *s, char c)
+static char	*get_word(char *s, char c)
 {
 	int			len;
 	int			i;
@@ -87,7 +87,7 @@ char	**ft_split(char *s, char c)
 			tab[i++][0] = '\0';
 			continue ;
 		}
-		tab[i++] = get_next_word(s, c);
+		tab[i++] = get_word(s, c);
 	}
 	tab[i] = NULL;
 	return (tab);

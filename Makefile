@@ -14,6 +14,7 @@ SRCS        :=      srcs/core/ft_split.c \
                           srcs/moves/rotate.c \
                           srcs/core/sort_stacks.c \
                           srcs/core/mid_sort.c \
+                          srcs/core/joints.c \
                           srcs/moves/swap.c \
                           
 OBJS        := $(SRCS:.c=.o)

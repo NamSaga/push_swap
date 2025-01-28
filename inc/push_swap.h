@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+ #include <stddef.h>
+
 
 typedef struct s_stack_node
 {
@@ -68,5 +70,10 @@ int						syntax_err(char *str_n);
 int						err_dup(t_stack_node *a, int n);
 void					ft_free(t_stack_node **stack);
 void					err_free(t_stack_node **a);
+
+size_t					ft_strlen(const char *s);
+size_t					ft_strlcpy(char *dst, const char *src, size_t size);
+char					*ft_strjoin(char const *s1, char const *s2);
+char					*join_all(char **tab);
 
 #endif
